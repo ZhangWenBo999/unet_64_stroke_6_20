@@ -20,7 +20,7 @@
                 "name": ["data.dataset", "InpaintDataset"], // import Dataset() class / function(not recommend) from data.dataset.py (default is [data.dataset.py])
                 "args":{ // arguments to initialize dataset
                     // train_giga
-                    "data_root": "png_celebahq_64/png_train_28000.txt",
+                    "data_root": "/kaggle/input/png-celebahq-64-ka/png_celebahq_64_ka/png_train_28000.txt",
                     // train_local_test_giga
 //                    "data_root": "datasets/celebahq_flist/flist/train_shuffled_local_test.flist",
 
@@ -35,15 +35,15 @@
             "dataloader":{
                 "validation_split": 10, // percent or number
                 "args":{ // arguments to initialize train_dataloader
-                    "batch_size": 10, // batch size in each gpu
-                    "num_workers": 0,
+                    "batch_size": 75, // batch size in each gpu
+                    "num_workers": 10,
                     "shuffle": true,
                     "pin_memory": true,
                     "drop_last": true
                 },
                 "val_args":{ // arguments to initialize valid_dataloader, will overwrite the parameters in train_dataloader
                     "batch_size": 10, // batch size in each gpu
-                    "num_workers": 0,
+                    "num_workers": 10,
                     "shuffle": false,
                     "pin_memory": true,
                     "drop_last": false

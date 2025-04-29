@@ -1,0 +1,30 @@
+        self.dca_sc = DCA(
+            features=[64, 64, 64, 64, 128, 128, 128, 256, 256, 256, 512, 512],  # 每个输入特征图的通道数
+            strides=[16, 16, 16, 8, 8, 8, 4, 4, 4, 2, 2, 2],  # 保持原始分辨率
+            patch=16,  # patch 大小
+            channel_att=True,  # 启用通道注意力
+            spatial_att=True,  # 启用空间注意力
+            n=1,  # 使用一个CCSABlock
+            channel_head=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # 通道注意力头数
+            spatial_head=[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],  # 空间注意力头数
+        )
+
+
+
+        hs = []
+        gammas = gammas.view(-1, )
+        emb = self.cond_embed(gamma_embedding(gammas, self.inner_channel))
+
+        h = x.type(torch.float32)
+        for module in self.input_blocks:
+            h = module(h, emb)
+            hs.append(h)
+
+        hs = list(self.dca_sc(hs))
+
+        h = self.middle_block(h, emb)
+        for module in self.output_blocks:
+            h = torch.cat([h, hs.pop()], dim=1)
+            h = module(h, emb)
+        h = h.type(x.dtype)
+        return self.out(h)

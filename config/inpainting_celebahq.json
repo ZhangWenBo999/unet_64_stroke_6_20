@@ -10,7 +10,7 @@
         "tb_logger": "tb_logger", // path of tensorboard logger
         "results": "results",
         "checkpoint": "checkpoint",
-        "resume_state": "/kaggle/input/64-unet-stroke/64_unet_stroke/85"
+        "resume_state": "/kaggle/input/64-unet-stroke/64_unet_stroke/165"
 //        "resume_state": null // ex: 100, loading .state  and .pth from given epoch and iteration
     },
 
@@ -151,8 +151,8 @@
         "save_checkpoint_epoch": 1,
         "log_iter": 1e3, // log every specified number of iterations
         "tensorboard" : true,  // tensorboardX enable
-        "min_val_FID_loss": 1e3, // 记录验证阶段最小的mae值，便于选择最好的权重文件
-//        "min_val_FID_loss": 56.84507751464844, // 记录验证阶段最小的mae值，便于选择最好的权重文件
+//        "min_val_FID_loss": 1e3, // 记录验证阶段最小的mae值，便于选择最好的权重文件
+        "min_val_FID_loss": 23.963638305664062, // 记录验证阶段最小的mae值，便于选择最好的权重文件
         "min_val_flag": false, // 最好权重文件的标志位
         "train_previous": [], // 保存之前的训练损失，便于自动生成训练损失曲线
         "eval_previous": []   // 保存之前的验证损失，便于自动生成验证损失曲线
